@@ -53,11 +53,11 @@
    
    
     <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
+    <header class="jumbotron my-3">
       <p class="lead"></p>
       <h3>Cliente</h3>
       <form method="post" action="savecliente.php">
-        <input type="hidden" name="txtId" value="0">
+        <input type="hidden" name="txtmatricula" value="0">
         <div class="form-group">
           <label for="txtNome">Nome</label>
           <input type="text" class="form-control" id="txtnome" name="txtnome">

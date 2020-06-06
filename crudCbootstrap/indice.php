@@ -52,8 +52,7 @@
   <div class="container">
    
    <?php
-    include 'dbconnect.php';
-    //$con = mysqli_connect("localhost","bob","bob","univille");
+    $con = mysqli_connect("localhost","bob","bob","univille");
     $sql = "select * from aluno";
 		$result = mysqli_query($con,$sql);
    ?>
@@ -75,11 +74,9 @@
            while($row = $result->fetch_row()){
           ?>
           <tr>
-            <td><?=$row[0]?></td>
             <td><?=$row[1]?></td>
             <td><?=$row[2]?></td>
-            <td><a href='front_edit.php?matricula=".<?= $row[0]?>."' class="btn btn-primary btn-lg">Editar</a></td>
-            <td><a href='delete.php?matricula=".<?= $row[0]?>."' class="btn btn-primary btn-lg">Deletar</a></td>
+            <td><?=$row[3]?></td>
           </tr>
           <?php
           }

@@ -50,42 +50,37 @@
 
   <!-- Page Content -->
   <div class="container">
+    
+    <?php
+        include 'dbconnect.php';
+       //$con = mysqli_connect("localhost","bob","bob","univille");
+       $matricula = filter_input(INPUT_GET, 'matricula', FILTER_SANITIZE_NUMBER_INT);
+       $sql = "select*from aluno where matricula = '$matricula'";
+       $result = mysqli_query($con,$sql);
+       $row_user =  mysqli_fetch_assoc($result);
+      ?>
    
-   <?php
-    include 'dbconnect.php';
-    //$con = mysqli_connect("localhost","bob","bob","univille");
-    $sql = "select * from aluno";
-		$result = mysqli_query($con,$sql);
-   ?>
+   
     <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
+    <header class="jumbotron my-3">
       <p class="lead"></p>
-      <a href="form_cliente.php"class="btn btn-primary btn-lg">Incluir</a>
-      <h3>Listagem de Clientes</h3>
-      <table class = "table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>cpf</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-           while($row = $result->fetch_row()){
-          ?>
-          <tr>
-            <td><?=$row[0]?></td>
-            <td><?=$row[1]?></td>
-            <td><?=$row[2]?></td>
-            <td><a href='front_edit.php?matricula=".<?= $row[0]?>."' class="btn btn-primary btn-lg">Editar</a></td>
-            <td><a href='delete.php?matricula=".<?= $row[0]?>."' class="btn btn-primary btn-lg">Deletar</a></td>
-          </tr>
-          <?php
-          }
-          ?>
-        </tbody>
-      </table>
+      <h3>Cliente</h3>
+      <form method="post" action="back_edit.php">
+        <input type="hidden" name="txtmatricula" value="<?php 
+            echo $row_user['matricula'];?>"><br><br>
+        <div class="form-group">
+          <label for="txtnome">Nome</label>
+          <input type="text" class="form-control" id="txtnome" name="txtnome" value="<?php 
+            echo $row_user['nome'];?>"><br><br>
+         </div>
+         <div class="form-group">
+          <label for="txtcpf">Cpf</label>
+          <input type="text" class="form-control" id="txtcpf" name="txtcpf" value="<?php 
+            echo $row_user['cpf'];?>"><br><br>
+         </div>
+         <button type="submit" class="btn btn-primary">Editar</button>
+
+      </form>
       
      </p>
     </header>
